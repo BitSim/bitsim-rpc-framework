@@ -2,17 +2,17 @@ package github.bitsim;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 /**
  * @author BitSim
  * @version v1.0.0
  **/
-public class NewMyServiceImpl implements NewMyService {
+public class LibBookingImpl {
     private final Logger logger= LoggerFactory.getLogger(NewMyServiceImpl.class);
-    @Override
     public String login(User user) {
-        logger.info(user.getUsername() + "访问了融合门户网页");
-        logger.info("融合门户登录中......");
+        logger.info(user.getUsername() + "访问了图书馆网页");
+        logger.info("图书馆登录中......");
         logger.info("登录成功");
-        return "融合门户";
+        return "图书馆";
     }
 }

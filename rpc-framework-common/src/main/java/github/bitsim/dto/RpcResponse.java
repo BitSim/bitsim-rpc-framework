@@ -1,5 +1,6 @@
-package github.bitsim;
+package github.bitsim.dto;
 
+import github.bitsim.enumerate.RpcResponseCode;
 import lombok.Data;
 
 import java.io.Serializable;

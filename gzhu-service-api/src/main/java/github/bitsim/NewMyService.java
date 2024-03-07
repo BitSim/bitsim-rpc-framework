@@ -6,5 +6,5 @@ package github.bitsim;
  **/
 public interface NewMyService {
 
-    boolean login(User user);
+    String login(User user);
 }

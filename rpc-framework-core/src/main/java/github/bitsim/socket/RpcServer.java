@@ -1,5 +1,6 @@
-package github.bitsim;
+package github.bitsim.socket;
 
+import github.bitsim.registry.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,8 +18,11 @@ public class RpcServer {
     private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
 
     private final ExecutorService threadPoolExecutor;
+    private final ServiceRegistry serviceRegistry;
+    private final RpcRequestThreadHandler rpcRequestThreadHandler=new RpcRequestThreadHandler();
 
-    public RpcServer() {
+    public RpcServer(ServiceRegistry serviceRegistry) {
+        this.serviceRegistry = serviceRegistry;
         BlockingQueue<Runnable> blockingQueue = new SynchronousQueue<>();
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
 
@@ -27,23 +31,16 @@ public class RpcServer {
         );
     }
 
-    public void register(int port, Object service) {
+    public void start(int port) {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             logger.info("socket服务启动成功......");
             Socket socket;
             while((socket=serverSocket.accept())!=null){
                 logger.info("客户端连接成功......");
-                threadPoolExecutor.execute(new WorkerThread(socket,service));
+                threadPoolExecutor.execute(new RpcRequestThread(socket, rpcRequestThreadHandler,serviceRegistry));
             }
         } catch (IOException e) {
             logger.error("socket error:" + e);
         }
     }
-
-    public static void main(String[] args) {
-        RpcServer rpcServer=new RpcServer();
-        rpcServer.register(9999,"1");
-    }
-
-
 }

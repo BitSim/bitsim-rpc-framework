@@ -1,4 +1,4 @@
-package github.bitsim;
+package github.bitsim.dto;
 
 import lombok.Builder;
 import lombok.Data;

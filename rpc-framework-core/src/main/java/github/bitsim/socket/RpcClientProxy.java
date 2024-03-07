@@ -1,5 +1,6 @@
-package github.bitsim;
+package github.bitsim.socket;
 
+import github.bitsim.dto.RpcRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -30,9 +31,6 @@ public class RpcClientProxy implements InvocationHandler {
                 parameters(args).
                 parameterTypes(method.getParameterTypes()).
                 build();
-//        Object object=targetClass.newInstance();
-//        Method method1=targetClass.getDeclaredMethod(rpcRequest.getMethodName(),rpcRequest.getParameterTypes());
-//        boolean result= (boolean) method1.invoke(object,rpcRequest.getParameters());
         return RpcClient.sendRequest(host, port, rpcRequest);
     }
 }
