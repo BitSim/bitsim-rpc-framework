@@ -1,5 +1,7 @@
-package github.bitsim;
+package github.bitsim.service;
 
+import github.bitsim.NewMyService;
+import github.bitsim.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

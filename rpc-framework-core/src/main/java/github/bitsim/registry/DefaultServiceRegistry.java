@@ -40,7 +40,7 @@ public class DefaultServiceRegistry implements ServiceRegistry {
     }
 
     @Override
-    public Object getService(String interfaceName) {
+    public synchronized Object getService(String interfaceName) {
         Object service = serviceMap.get(interfaceName);
         if (Objects.isNull(service)) {
             throw new RpcException(RpcErrorMessageEnum.INTERFACE_NO_FOUND_SERVICE, interfaceName + ":接口没有相应的业务实现");

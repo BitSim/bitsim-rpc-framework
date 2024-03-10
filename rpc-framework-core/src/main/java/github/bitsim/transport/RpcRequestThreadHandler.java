@@ -1,4 +1,4 @@
-package github.bitsim.socket;
+package github.bitsim.transport;
 
 import github.bitsim.dto.RpcRequest;
 import github.bitsim.dto.RpcResponse;
@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * @author BitSim
@@ -38,6 +39,5 @@ public class RpcRequestThreadHandler {
         }
         Method method = service.getClass().getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterTypes());
         return RpcResponse.success(method.invoke(service, rpcRequest.getParameters()));
-
     }
 }

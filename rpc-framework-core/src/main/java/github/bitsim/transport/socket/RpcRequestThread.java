@@ -1,7 +1,8 @@
-package github.bitsim.socket;
+package github.bitsim.transport.socket;
 
 import github.bitsim.dto.RpcRequest;
 import github.bitsim.registry.ServiceRegistry;
+import github.bitsim.transport.RpcRequestThreadHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

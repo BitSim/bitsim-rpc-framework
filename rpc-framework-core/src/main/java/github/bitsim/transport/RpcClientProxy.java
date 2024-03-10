@@ -1,6 +1,7 @@
-package github.bitsim.socket;
+package github.bitsim.transport;
 
 import github.bitsim.dto.RpcRequest;
+import github.bitsim.transport.socket.SocketClient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -17,6 +18,10 @@ import java.lang.reflect.Proxy;
 public class RpcClientProxy implements InvocationHandler {
     private String host;
     private int port;
+    private RpcClient rpcClient;
+    public RpcClientProxy(RpcClient rpcClient){
+        this.rpcClient=rpcClient;
+    }
 
     @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> clazz) {
@@ -31,6 +36,6 @@ public class RpcClientProxy implements InvocationHandler {
                 parameters(args).
                 parameterTypes(method.getParameterTypes()).
                 build();
-        return RpcClient.sendRequest(host, port, rpcRequest);
+        return rpcClient.sendRequest(rpcRequest);
     }
 }

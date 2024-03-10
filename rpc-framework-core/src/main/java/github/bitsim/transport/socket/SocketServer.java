@@ -1,6 +1,8 @@
-package github.bitsim.socket;
+package github.bitsim.transport.socket;
 
+import github.bitsim.transport.RpcServer;
 import github.bitsim.registry.ServiceRegistry;
+import github.bitsim.transport.RpcRequestThreadHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +16,14 @@ import java.util.concurrent.*;
  * @author BitSim
  * @version v1.0.0
  **/
-public class RpcServer {
-    private static final Logger logger = LoggerFactory.getLogger(RpcServer.class);
+public class SocketServer implements RpcServer {
+    private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
     private final ExecutorService threadPoolExecutor;
     private final ServiceRegistry serviceRegistry;
     private final RpcRequestThreadHandler rpcRequestThreadHandler=new RpcRequestThreadHandler();
 
-    public RpcServer(ServiceRegistry serviceRegistry) {
+    public SocketServer(ServiceRegistry serviceRegistry) {
         this.serviceRegistry = serviceRegistry;
         BlockingQueue<Runnable> blockingQueue = new SynchronousQueue<>();
         ThreadFactory threadFactory = Executors.defaultThreadFactory();
